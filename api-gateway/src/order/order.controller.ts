@@ -34,11 +34,11 @@ export class OrderController {
 
     @Post()
     async create(@Body() orderDTO: OrderDTO): Promise<Observable<IOrder>> {
-        const recipeAleatory = await this._clientProxyRecipe.send(RecipeMSG.FIND_ONE, '');
+        const recipeAleatory = await this._clientProxyRecipe.send(RecipeMSG.FIND_ONE_RANDOM, '').toPromise();
         if(!recipeAleatory) 
             throw new HttpException('Recipe Not Found', HttpStatus.NOT_FOUND);
 
-        return this._clientProxyOrder.send(OrderMSG.CREATE, orderDTO);
+        return this._clientProxyOrder.send(OrderMSG.CREATE, { orderDTO, recipeAleatory});
     }
 
     @Get()

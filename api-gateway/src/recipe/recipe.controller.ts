@@ -4,7 +4,7 @@ import { RecipeService } from './recipe.service';
 import { IngredientService } from 'src/ingredient/ingredient.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ClientProxyRestaurant } from 'src/common/proxy/client-proxy';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { IRecipe } from 'src/common/interfaces/recipe.interface';
 import { IngredientMSG, RecipeMSG } from 'src/common/constants';
 
@@ -50,6 +50,14 @@ export class RecipeController {
     @Get(':id')
     findOne(@Param('id') id: string): Observable<IRecipe> {
         return this._clientProxyRecipe.send(RecipeMSG.FIND_ONE, id);
+    }
+
+    @Get()
+    async findOneRandom(): Promise<IRecipe> {
+        const recipes$ = this._clientProxyRecipe.send(RecipeMSG.FIND_ALL, '');
+        const recipes = await firstValueFrom(recipes$);
+        const indice = Math.floor(Math.random() * recipes.length);
+        return recipes[indice];
     }
 
     @Post(':recipeId/ingredient/:ingredientName/quantity/:quantity')

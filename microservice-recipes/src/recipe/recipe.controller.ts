@@ -52,11 +52,14 @@ export class RecipeController {
 
     @MessagePattern(RecipeMSG.ADD_INGREDIENT)
     async addIngredientQuantity(@Payload() payload) {
-        console.log(payload.recipeId)
-        console.log(payload.ingredientId)
-        console.log(payload.quan)
         return this.recipeService.addIngredientQuantity(payload.recipeId, payload.ingredientId, payload.quan);
     }
+
+    @MessagePattern(RecipeMSG.FIND_ONE_RANDOM)
+    findOneRandom() {
+        return this.recipeService.findOneRandom();
+    }
+
 
     
 
