@@ -38,18 +38,6 @@ export class RecipeController {
     }
     
 
-    // @Post(':recipeId/ingredient/:ingredientId')
-    // async addIngredient(@Param('recipeId') recipeId: string, 
-    // @Param('ingredientId') ingredientId: string) {
-    //     const ingredient = await this.ingredientService.findOne(ingredientId);
-    //     if (!ingredient) {
-    //         throw new HttpException('Ingredient Not Found', HttpStatus.NOT_FOUND);
-    //     }
-
-    //     return this.recipeService.addIngredient(recipeId, ingredientId);
-
-    // }
-
     @MessagePattern(RecipeMSG.ADD_INGREDIENT)
     async addIngredientQuantity(@Payload() payload) {
         return this.recipeService.addIngredientQuantity(payload.recipeId, payload.ingredientId, payload.quan);
@@ -58,6 +46,11 @@ export class RecipeController {
     @MessagePattern(RecipeMSG.FIND_ONE_RANDOM)
     findOneRandom() {
         return this.recipeService.findOneRandom();
+    }
+
+    @MessagePattern(RecipeMSG.COOK)
+    cook(@Payload() payload) {
+        return this.recipeService.cook(payload);
     }
 
 

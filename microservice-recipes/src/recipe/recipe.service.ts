@@ -35,16 +35,6 @@ export class RecipeService {
         }
     }
 
-    // async addIngredient(recipeId: string, ingredientId:string): Promise <IRecipe> {
-    //     return await this.model.findByIdAndUpdate(
-    //         recipeId, 
-    //         {
-    //             $addToSet: {ingredients: ingredientId}
-    //         },
-    //         { new: true }
-    //     );
-    // }
-
     async addIngredientQuantity(recipeId: string, ingredientId:string, quant: number): Promise <IRecipe> {
         return await this.model.findByIdAndUpdate(
             recipeId, 
@@ -68,6 +58,11 @@ export class RecipeService {
         const recipes = await this.model.find();
         const indice = Math.floor(Math.random() * recipes.length);
         return recipes[indice];
+    }
+
+    async cook(recipe): Promise<IRecipe> {
+        console.log(`Cocinando ${recipe.name}`)
+        return recipe
     }
 
 

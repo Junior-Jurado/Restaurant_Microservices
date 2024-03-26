@@ -17,35 +17,16 @@ export class RecipeController {
     private _clientProxyRecipe = this.clientProxy.clientProxyRecipes();
     private _clientProxyIngredient = this.clientProxy.clientProxyIngredients();
 
-    // constructor(private readonly recipeService: RecipeService, 
-    //             private readonly ingredientService: IngredientService) {}
-
-    // @Post()
-    // @ApiOperation({summary: 'Create Recipe Only Name'})
-    // create(@Body() recipeDTO: RecipeDTO) {
-    //     return this.recipeService.create(recipeDTO);
-    // }
     @Post()
     @ApiOperation({summary: 'Create Recipe Only Name'})
     create(@Body() recipeDTO: RecipeDTO): Observable<IRecipe> {
         return this._clientProxyRecipe.send(RecipeMSG.CREATE, recipeDTO);
     }
 
-
-    // @Get()
-    // findAll() {
-    //     return this.recipeService.findAll();
-    // }
-
     @Get()
     findAll(): Observable<IRecipe[]> {
         return this._clientProxyRecipe.send(RecipeMSG.FIND_ALL, '');
     }
-
-    // @Get(':id')
-    // findOne(@Param('id') id: string) {
-    //     return this.recipeService.findOne(id);
-    // }
 
     @Get(':id')
     findOne(@Param('id') id: string): Observable<IRecipe> {
@@ -81,68 +62,20 @@ export class RecipeController {
             {recipeId, ingredientId, quan})
     }
 
-    // @Put(':id')
-    // update(@Param('id') id: string, @Body() recipeDTO: RecipeDTO) {
-    //     return this.recipeService.update(id, recipeDTO);
-    // }
     @Put(':id')
     update(@Param('id') id: string, @Body() recipeDTO: RecipeDTO): Observable<IRecipe> {
         return this._clientProxyRecipe.send(RecipeMSG.UPDATE, { id, recipeDTO});
     }
 
-    // @Delete(':id')
-    // delete(@Param('id') id:string) {
-    //     return this.recipeService.delete(id);
-    // }
     @Delete(':id')
     delete(@Param('id') id:string): Observable<IRecipe> {
         return this._clientProxyRecipe.send(RecipeMSG.DELETE, id);
     }
 
-    // @Post(':recipeId/ingredient/:ingredientId')
-    // async addIngredient(@Param('recipeId') recipeId: string, 
-    // @Param('ingredientId') ingredientId: string) {
-    //     const ingredient = await this.ingredientService.findOne(ingredientId);
-    //     if (!ingredient) {
-    //         throw new HttpException('Ingredient Not Found', HttpStatus.NOT_FOUND);
-    //     }
-
-    //     return this.recipeService.addIngredient(recipeId, ingredientId);
-
-    // }
-
-    // @Post(':recipeId/ingredient/:ingredientName/quantity/:quantity')
-    // async addIngredientQuantity(
-    //     @Param('recipeId') recipeId: string,
-    //     @Param('ingredientName') ingredientName: string,
-    //     @Param('quantity') quantity: string
-    // ) {
-    //     const ingredient = await this.ingredientService.findOneByName(ingredientName);
-
-    //     if (!ingredient) {
-    //         throw new HttpException('Ingredient Not Found', HttpStatus.NOT_FOUND);
-    //     }
-
-    //     const id =  ingredient._id.toString();
-    //     const q =  parseInt(quantity);
-    //     return this.recipeService.addIngredientQuantity(recipeId, id, q);
-    // }
-
-    // @Post(':recipeId/ingredient/:ingredientName/quantity/:quantity')
-    // async addIngredientQuantity(
-    //     @Param('recipeId') recipeId: string,
-    //     @Param('ingredientName') ingredientName: string,
-    //     @Param('quantity') quantity: string
-    // ) {
-    //     const ingredient = await this.ingredientService.findOneByName(ingredientName);
-
-    //     if (!ingredient) {
-    //         throw new HttpException('Ingredient Not Found', HttpStatus.NOT_FOUND);
-    //     }
-
-    //     const id =  ingredient._id.toString();
-    //     const q =  parseInt(quantity);
-    //     return this.recipeService.addIngredientQuantity(recipeId, id, q);
-    // }
+    @Post('cook')
+    cook(@Body() recipe: RecipeDTO): Observable<IRecipe> {
+        console.log(recipe)
+        return this._clientProxyRecipe.send(RecipeMSG.COOK, recipe)
+    }
 
 }
