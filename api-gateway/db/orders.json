@@ -1,0 +1,6 @@
+{
+    "_id": "ObjectId",
+    "timestamp": "Date",
+    "status": "ObjectId",
+    "recipe": "ObjectId"
+}

@@ -1,0 +1,12 @@
+uuid
+class-validator
+class-transformer
+--save mongoose
+--save mongoose-autopopulate
+--save @nestjs/mongoose
+--save @nestjs/config
+@nestjs/swagger 
+swagger-ui-express
+amqplib 
+amqp-connection-manager
+@nestjs/microservices
