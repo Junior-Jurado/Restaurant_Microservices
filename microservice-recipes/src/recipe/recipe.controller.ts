@@ -48,10 +48,10 @@ export class RecipeController {
         return this.recipeService.findOneRandom();
     }
 
-    @MessagePattern(RecipeMSG.COOK)
-    cook(@Payload() payload) {
-        return this.recipeService.cook(payload);
-    }
+    // @MessagePattern(RecipeMSG.COOK)
+    // cook(@Payload() payload) {
+    //     return this.recipeService.cook(payload);
+    // }
 
 
     

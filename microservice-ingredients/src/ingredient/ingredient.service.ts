@@ -39,5 +39,134 @@ export class IngredientService {
         }
     }
 
+    async getIngredients(ingredients: IngredientDTO[]):Promise<boolean> {
+
+        for (const ingredient of ingredients) {
+            try {
+                const ingredientDB = await this.findOne(ingredient._id);
+                const idIngredient = ingredient._id;
+                if (ingredientDB.quantity >= ingredient.quantity) {
+                    ingredientDB.quantity -= ingredient.quantity;
+                    await this.update(idIngredient, ingredientDB);
+                } else {
+                    while(ingredientDB.quantity < ingredient.quantity) {
+                        const response = await fetch(`https://microservices-utadeo-arq-fea471e6a9d4.herokuapp.com/api/v1/software-architecture/market-place?ingredient=${ingredientDB.name.toLowerCase()}`, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        });
+            
+                        // Verificar si la respuesta fue exitosa
+                        if (!response.ok) {
+                            throw new Error(`Failed to fetch ${ingredient} information`);
+                        }
+        
+                        const responseData = await response.json();
+    
+                        const ingredientName = Object.keys(responseData.data)[0];
+                        const ingredientQuantity = responseData.data[ingredientName];
+
+                        console.log(`El ingrediente ${ingredientName} tenia ${ingredientDB.quantity}. Ahora tiene ${ingredientDB.quantity+ingredientQuantity}`)
+    
+                        ingredientDB.quantity += ingredientQuantity;
+                        await this.update(idIngredient, ingredientDB);
+                    }
+                    ingredientDB.quantity -= ingredient.quantity;
+                    await this.update(idIngredient, ingredientDB)
+                }
+            } catch (error) {
+                console.error('Error fetching ingredient:', error);
+                return false; 
+            }
+        }
+
+        // for (const ingredient of recipe.ingredients) {
+        //     console.log(ingredient)
+        //     const ingredientDB = await this._clientProxyIngredient.send(IngredientMSG.FIND_ONE, ingredient._id).toPromise();
+        //     const idIngredient = ingredient._id;
+        //     if (ingredientDB.quantity >= ingredient.quantity) {
+        //         ingredientDB.quantity -= ingredient.quantity;
+        //         await this._clientProxyIngredient.send(IngredientMSG.UPDATE, { id: idIngredient, ingredientDTO: ingredientDB}).toPromise();
+        //     } else {
+
+        //         while(ingredientDB.quantity < ingredient.quantity) {
+        //             const response = await fetch(`https://microservices-utadeo-arq-fea471e6a9d4.herokuapp.com/api/v1/software-architecture/market-place?ingredient=${ingredient.name.toLowerCase()}`, {
+        //                 method: 'GET',
+        //                 headers: {
+        //                     'Content-Type': 'application/json',
+        //                 },
+        //             });
+        
+        //             // Verificar si la respuesta fue exitosa
+        //             if (!response.ok) {
+        //                 throw new Error(`Failed to fetch ${ingredient} information`);
+        //             }
+    
+        //             const responseData = await response.json();
+
+        //             const ingredientName = Object.keys(responseData.data)[0];
+        //             const ingredientQuantity = responseData.data[ingredientName];
+
+        //             ingredientDB.quantity += ingredientQuantity;
+
+        //             console.log(ingredientDB);
+        //         }
+
+        //         ingredientDB.quantity -= ingredient.quantity;
+        //         await this._clientProxyIngredient.send(IngredientMSG.UPDATE, { id: idIngredient, ingredientDTO: ingredientDB}).toPromise();
+        //     }
+        // }
+
+
+
+
+
+
+
+
+
+        // for (const ingredient of recipe.ingredients) {
+        //     console.log(ingredient)
+        //     const ingredientDB = await this._clientProxyIngredient.send(IngredientMSG.FIND_ONE, ingredient._id).toPromise();
+        //     const idIngredient = ingredient._id;
+        //     if (ingredientDB.quantity >= ingredient.quantity) {
+        //         ingredientDB.quantity -= ingredient.quantity;
+        //         await this._clientProxyIngredient.send(IngredientMSG.UPDATE, { id: idIngredient, ingredientDTO: ingredientDB}).toPromise();
+        //     } else {
+
+        //         while(ingredientDB.quantity < ingredient.quantity) {
+        //             const response = await fetch(`https://microservices-utadeo-arq-fea471e6a9d4.herokuapp.com/api/v1/software-architecture/market-place?ingredient=${ingredient.name.toLowerCase()}`, {
+        //                 method: 'GET',
+        //                 headers: {
+        //                     'Content-Type': 'application/json',
+        //                 },
+        //             });
+        
+        //             // Verificar si la respuesta fue exitosa
+        //             if (!response.ok) {
+        //                 throw new Error(`Failed to fetch ${ingredient} information`);
+        //             }
+    
+        //             const responseData = await response.json();
+
+        //             const ingredientName = Object.keys(responseData.data)[0];
+        //             const ingredientQuantity = responseData.data[ingredientName];
+
+        //             ingredientDB.quantity += ingredientQuantity;
+
+        //             console.log(ingredientDB);
+        //         }
+
+        //         ingredientDB.quantity -= ingredient.quantity;
+        //         await this._clientProxyIngredient.send(IngredientMSG.UPDATE, { id: idIngredient, ingredientDTO: ingredientDB}).toPromise();
+        //     }
+        // }
+
+
+
+        return true;
+    }
+
     
 }

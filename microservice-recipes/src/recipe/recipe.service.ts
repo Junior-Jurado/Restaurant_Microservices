@@ -60,10 +60,14 @@ export class RecipeService {
         return recipes[indice];
     }
 
-    async cook(recipe): Promise<IRecipe> {
-        console.log(`Cocinando ${recipe.name}`)
-        return recipe
-    }
+    // async cook(recipe: IRecipe): Promise<IRecipe> {
+    //     console.log('Cocinando:');
+    //     recipe.ingredients.forEach(ingredient => {
+    //         console.log(`ID: ${ingredient._id}, Quantity: ${ingredient.quantity}`);
+    //     });
+    //     return recipe;
+
+    // }
 
 
 }

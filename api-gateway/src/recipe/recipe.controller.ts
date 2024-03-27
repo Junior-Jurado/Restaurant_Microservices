@@ -1,7 +1,5 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { RecipeDTO } from './dto/recipe.dto';
-import { RecipeService } from './recipe.service';
-import { IngredientService } from 'src/ingredient/ingredient.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ClientProxyRestaurant } from 'src/common/proxy/client-proxy';
 import { Observable, firstValueFrom } from 'rxjs';
@@ -72,10 +70,34 @@ export class RecipeController {
         return this._clientProxyRecipe.send(RecipeMSG.DELETE, id);
     }
 
-    @Post('cook')
-    cook(@Body() recipe: RecipeDTO): Observable<IRecipe> {
-        console.log(recipe)
-        return this._clientProxyRecipe.send(RecipeMSG.COOK, recipe)
+    @Post('cook/:orderId') // Asumiendo que el orderId se espera en la ruta
+    async cook(@Body() recipe: RecipeDTO, @Param('orderId') orderId: string): Promise<Observable<boolean>> {
+        console.log('Order ID:', orderId);
+        const flag = await this._clientProxyIngredient.send(IngredientMSG.GET_INGREDIENTS, recipe.ingredients).toPromise();
+
+        if(flag) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/v1/order/${orderId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ isDone: true }), 
+                });
+        
+                if (response.ok) {
+                    console.log(`Order with ID ${orderId} successfully updated`);
+                } else {
+                    console.error(`Failed to update order with ID ${orderId}. Status: ${response.status}`);
+                }
+        
+            } catch (error) {
+                console.error('Error updating order:', error);
+                throw new Error('Failed to update order');
+            }
+        }
+        return flag;
     }
+
 
 }

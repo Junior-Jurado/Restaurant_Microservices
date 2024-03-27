@@ -11,4 +11,5 @@ export class IngredientDTO {
     @IsNotEmpty()
     @IsNumber()
     readonly quantity: number;
+    _id?: any;
 }

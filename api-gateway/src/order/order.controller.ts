@@ -22,7 +22,6 @@ export class OrderController {
     @Post()
     async create(@Body() orderDTO: OrderDTO): Promise<Observable<IOrder>> {
         try {
-            // Enviar la petición al servicio de recetas y manejar los reintentos
             const recipeAleatory$ = this._clientProxyRecipe.send(RecipeMSG.FIND_ONE_RANDOM, '')
                 .pipe(
                     retryWhen(errors => errors.pipe(
@@ -39,34 +38,27 @@ export class OrderController {
                 )
                 .toPromise();
 
-            // Esperar la respuesta del servicio de recetas
             const recipeAleatory = await recipeAleatory$;
 
-            // Verificar si la receta aleatoria fue encontrada
             if (!recipeAleatory) {
                 throw new HttpException('Recipe Not Found', HttpStatus.NOT_FOUND);
             }
 
-            // Enviar la petición al servicio de órdenes y esperar la respuesta
             const createdOrder = await this._clientProxyOrder.send(OrderMSG.CREATE, { orderDTO, recipeAleatory }).toPromise();
 
-            // Hacer la petición fetch después de que se haya creado la orden
-            fetch('http://localhost:3000/api/v1/recipe/cook', {
+            fetch(`http://localhost:3000/api/v1/recipe/cook/${createdOrder._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(recipeAleatory),
-            }).then(response => {
-                console.log(`Response ${response}`)
             }).catch(error => {
                 console.error('Error en la petición fetch:', error);
             });
 
-            // Devolver la orden creada
             return createdOrder;
+
         } catch (error) {
-            // Manejar errores
             console.error('Error en la creación de la orden:', error);
             throw new HttpException('Error creating order', HttpStatus.INTERNAL_SERVER_ERROR);
         }

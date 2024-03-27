@@ -4,13 +4,15 @@ export enum RabbitMQ {
     RecipeQueue = 'recipes'
 }
 
-export enum IngredientMSG{
+
+export enum IngredientMSG {
     CREATE = 'CREATE_INGREDIENT',
     FIND_ALL = 'FIND_INGREDIENTS',
     FIND_ONE = 'FIND_INGREDIENT',
     UPDATE = 'UPDATE_INGREDIENT',
     DELETE = 'DELETE_INGREDIENT',
-    FIND_ONE_BY_NAME = 'FIND_INGREDIENTE_BY_NAME'
+    FIND_ONE_BY_NAME = 'FIND_INGREDIENTE_BY_NAME',
+    GET_INGREDIENTS = "GET_INGREDIENTS"
 }
 
 export enum RecipeMSG {

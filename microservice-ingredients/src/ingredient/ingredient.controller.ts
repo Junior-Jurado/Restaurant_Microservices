@@ -40,6 +40,11 @@ export class IngredientController {
         return this.ingredientService.delete(id);
     }
 
+    @MessagePattern(IngredientMSG.GET_INGREDIENTS)
+    getIngredients(@Payload() payload) {
+        return this.ingredientService.getIngredients(payload);
+    }
+
     
 
 }
