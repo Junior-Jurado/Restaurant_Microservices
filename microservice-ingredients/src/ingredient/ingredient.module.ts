@@ -3,7 +3,7 @@ import { IngredientController } from './ingredient.controller';
 import { IngredientService } from './ingredient.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { INGREDIENT, SHOPPING_HISTORY } from 'src/common/models/models';
-import { IngredientSchema } from './schema/ingredient.schema';
+import { IngredientSchema, ShoppingHistorySchema } from './schema/ingredient.schema';
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import { IngredientSchema } from './schema/ingredient.schema';
         },
         {
           name: SHOPPING_HISTORY.name,
-          useFactory: () => IngredientSchema
+          useFactory: () => ShoppingHistorySchema
         },
       ]
     )
