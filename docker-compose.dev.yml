@@ -2,8 +2,11 @@ version: '3.7'
 
 services:
     app:
-      image: juniorjurado2004/app_restaurant:v1
+      image: app_restaurant:v1
       container_name: app_restaurant
+      build:
+        context: ./api-gateway
+        dockerfile: Dockerfile
       env_file: .env
       ports:
         - 80:3000
@@ -15,8 +18,11 @@ services:
         - ms_nestjs
 
     microservice_ingredients:
-      image: juniorjurado2004/microservice-ingredients:v1
+      image: microservice-ingredients:v1
       container_name: microservice-ingredients
+      build:
+        context: ./microservice-ingredients
+        dockerfile: Dockerfile
       env_file: .env
       depends_on:
         - mongodb
@@ -26,8 +32,11 @@ services:
         - ms_nestjs
     
     microservice_recipes:
-      image: juniorjurado2004/microservice-recipes:v1
+      image: microservice-recipes:v1
       container_name: microservice-recipes
+      build:
+        context: ./microservice-recipes
+        dockerfile: Dockerfile
       env_file: .env
       depends_on:
         - mongodb
@@ -37,8 +46,11 @@ services:
         - ms_nestjs
     
     microservice_orders:
-      image: juniorjurado2004/microservice-orders:v1
+      image: microservice-orders:v1
       container_name: microservice-orders
+      build:
+        context: ./microservice-orders
+        dockerfile: Dockerfile
       env_file: .env
       depends_on:
         - mongodb
