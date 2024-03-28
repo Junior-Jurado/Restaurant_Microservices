@@ -20,6 +20,11 @@ export class IngredientController {
         return this.ingredientService.findAll();
     }
 
+    @MessagePattern(IngredientMSG.GET_SHOPPING_INGREDIENTS)
+    getShoppingIngredients() {
+        return this.ingredientService.findAllShopping();
+    }
+
     @MessagePattern(IngredientMSG.FIND_ONE)
     findOne(@Payload() id: string) {
         return this.ingredientService.findOne(id);
@@ -44,7 +49,6 @@ export class IngredientController {
     getIngredients(@Payload() payload) {
         return this.ingredientService.getIngredients(payload);
     }
-
     
 
 }

@@ -2,13 +2,16 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { IIngredient } from 'src/common/interfaces/ingredient.interface';
-import { INGREDIENT } from 'src/common/models/models';
+import { INGREDIENT, SHOPPING_HISTORY } from 'src/common/models/models';
 import { IngredientDTO } from './dto/ingredient.dto';
+import { IShoppingHistory } from 'src/common/interfaces/shoppingHistory.interface';
 
 @Injectable()
 export class IngredientService {
 
-    constructor(@InjectModel(INGREDIENT.name) private readonly model:Model <IIngredient>) {}
+    constructor(
+        @InjectModel(INGREDIENT.name) private readonly model:Model <IIngredient>,
+        @InjectModel(SHOPPING_HISTORY.name) private readonly modelS:Model <IShoppingHistory>) {}
 
     async create(ingredientDTO: IngredientDTO): Promise<IIngredient> {
         const newIngredient = new this.model(ingredientDTO);
@@ -17,6 +20,10 @@ export class IngredientService {
 
     async findAll(): Promise<IIngredient[]> {
         return await this.model.find()
+    }
+    
+    async findAllShopping(): Promise<IShoppingHistory[]> {
+        return await this.modelS.find()
     }
 
     async findOne(id: string): Promise<IIngredient> {
@@ -65,9 +72,16 @@ export class IngredientService {
                         const ingredientName = Object.keys(responseData.data)[0];
                         const ingredientQuantity = responseData.data[ingredientName];
 
+                        if(ingredientQuantity != 0){
+                            const newShopping = new this.modelS({
+                                name: ingredientName,
+                                quantity: ingredientQuantity
+                            });
+                            await newShopping.save();       
+                            ingredientDB.quantity += ingredientQuantity;
+                            await this.update(idIngredient, ingredientDB);
+                        }
                         
-                        ingredientDB.quantity += ingredientQuantity;
-                        await this.update(idIngredient, ingredientDB);
                     }
                     ingredientDB.quantity -= ingredient.quantity;
                     await this.update(idIngredient, ingredientDB)
