@@ -1,4 +1,4 @@
-<header data-bs-theme="dark">
+<ng-container>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">My Restaurant</a>
@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Ordenar</a>
+            <a class="nav-link" aria-current="page" href="#">Ordenar</a>
           </li>
           <li class="nav-item">
             <a
@@ -27,17 +27,13 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Fila</a>
+            <a class="nav-link" routerLink="/orders" routerLinkActive="active"
+              >Fila</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Bodega</a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/ingredientes"
-              routerLinkActive="active"
-              >Ingredientes</a
+            <a class="nav-link" routerLink="/recipes" routerLinkActive="active"
+              >Recetas</a
             >
           </li>
         </ul>
@@ -53,4 +49,4 @@
       </div>
     </div>
   </nav>
-</header>
+</ng-container>

@@ -1,0 +1,27 @@
+<ng-container>
+  <div class="col-md-4 mb-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">{{ recipe.name }}</h5>
+      </div>
+
+      <div class="card-body">
+        <img
+          class="card-img-top"
+          [src]="recipe.image.toLowerCase()"
+          alt="Card image cap"
+        />
+
+        <p class="card-text">Descripción: {{ recipe.description }}</p>
+        <button
+          type="button"
+          class="btn btn-primary btn-lg btn-block"
+          (click)="onClick()"
+        >
+          Ver Receta
+          <i class="fas fa-utensils fa-2x me-lg-4 mb-3 mb-lg-0"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

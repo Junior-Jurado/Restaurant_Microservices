@@ -1,0 +1,85 @@
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  rel="stylesheet"
+/>
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-12">
+    <div class="card card-stepper text-black" style="border-radius: 16px">
+      <div class="card-body p-5">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+          <div>
+            <h5 class="mb-0">
+              ORDEN
+              <span class="text-primary font-weight-bold" id="orderNumber"
+                >#order.orderNumber</span
+              >
+            </h5>
+          </div>
+          <div class="text-end">
+            <p class="mb-0"><span>order.recipe.name</span></p>
+            <p class="mb-0">
+              Estado
+              <span class="font-weight-bold">order.state</span>
+            </p>
+          </div>
+        </div>
+        <ul
+          id="progressbar-2"
+          class="d-flex justify-content-between mx-0 mt-0 mb-3 px-0 pt-0 pb-2"
+        >
+          <li
+            [class.active]="isStateActive('Created')"
+            class="step0 text-center"
+            id="step1"
+          ></li>
+          <li
+            [class.active]="isStateActive('Checking ingredients')"
+            class="step0 text-center"
+            id="step2"
+          ></li>
+          <li
+            [class.active]="isStateActive('In preparation')"
+            class="step0 text-center"
+            id="step3"
+          ></li>
+          <li
+            [class.active]="isStateActive('Delivered')"
+            class="step0 text-center"
+            id="step4"
+          ></li>
+        </ul>
+
+        <div class="d-flex justify-content-between">
+          <div class="d-lg-flex align-items-center me-lg-4">
+            <i class="fas fa-clipboard-list fa-3x me-lg-1"></i>
+            <div>
+              <p class="fw-bold mb-1">Orden</p>
+              <p class="fw-bold mb-0">Verificada</p>
+            </div>
+          </div>
+          <div class="d-lg-flex align-items-center me-lg-4">
+            <i class="fas fa-basket-shopping fa-3x me-lg-1"></i>
+            <div>
+              <p class="fw-bold mb-1">Ingredientes</p>
+              <p class="fw-bold mb-0">Listos</p>
+            </div>
+          </div>
+          <div class="d-lg-flex align-items-center me-lg-4">
+            <i class="fas fa-store fa-3x me-lg-1"></i>
+            <div>
+              <p class="fw-bold mb-1">Orden</p>
+              <p class="fw-bold mb-0">en preparacion</p>
+            </div>
+          </div>
+          <div class="d-lg-flex align-items-center">
+            <i class="fas fa-utensils fa-3x me-lg-1"></i>
+            <div>
+              <p class="fw-bold mb-1">Orden</p>
+              <p class="fw-bold mb-0">Lista</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

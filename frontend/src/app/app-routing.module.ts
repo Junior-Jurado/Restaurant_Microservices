@@ -10,6 +10,7 @@ const routes: Routes = [
       ),
   },
   { path: 'recipes', loadChildren: () => import('./pages/recipes/recipes.module').then(m => m.RecipesModule) },
+  { path: 'orders', loadChildren: () => import('./pages/orders/orders.module').then(m => m.OrdersModule) },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
