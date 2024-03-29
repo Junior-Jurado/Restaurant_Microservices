@@ -75,7 +75,7 @@ export class RecipeController {
         console.log('Order ID:', orderId);
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 60000));
+            await new Promise(resolve => setTimeout(resolve, 30000));
             const response1 = await fetch(`http://localhost:3000/api/v1/order/${orderId}`, {
                 method: 'PUT',
                 headers: {
@@ -100,7 +100,7 @@ export class RecipeController {
     
         if(flag) {
             try {
-                await new Promise(resolve => setTimeout(resolve, 60000));
+                await new Promise(resolve => setTimeout(resolve, 30000));
                 const response3 = await fetch(`http://localhost:3000/api/v1/order/${orderId}`, {
                     method: 'PUT',
                     headers: {
@@ -121,7 +121,7 @@ export class RecipeController {
             }
 
             try {
-                await new Promise(resolve => setTimeout(resolve, 60000));
+                await new Promise(resolve => setTimeout(resolve, 30000));
                 const response2 = await fetch(`http://localhost:3000/api/v1/order/${orderId}`, {
                     method: 'PUT',
                     headers: {
