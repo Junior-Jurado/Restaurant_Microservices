@@ -1,20 +1,25 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsEmpty } from "class-validator";
+import { IsBoolean, IsEmpty, IsNotEmpty, IsNumber } from "class-validator";
 import { RecipeDTO } from "src/recipe/dto/recipe.dto";
 
 
 export class OrderDTO {
     @ApiProperty()
-    @IsBoolean()
-    readonly isDone?: boolean;
+    readonly orderNumber: number;
+
     @IsEmpty()
-    @ApiProperty()
     readonly recipe: RecipeDTO;
+
+    @ApiProperty()
+    readonly state?: string;
+
+    @ApiProperty()
+    readonly tableNumber: number;
 
     constructor(data: Partial<OrderDTO>) {
         Object.assign(this, data);
-        if (this.isDone === undefined) {
-            this.isDone = false;
+        if (this.state === undefined) {
+            this.state = 'Created';
         }
     }
 }

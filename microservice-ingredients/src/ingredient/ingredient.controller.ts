@@ -20,6 +20,11 @@ export class IngredientController {
         return this.ingredientService.findAll();
     }
 
+    @MessagePattern(IngredientMSG.DELETE_SHOPPING)
+    deleteShoppingIngredients() {
+        return this.ingredientService.deleteAllShopping();
+    }
+
     @MessagePattern(IngredientMSG.GET_SHOPPING_INGREDIENTS)
     getShoppingIngredients() {
         return this.ingredientService.findAllShopping();

@@ -31,6 +31,17 @@ export class OrderService {
         return await this.model.findById(id);
     }
 
+    async findNumberOrder(numberOrder: string): Promise<IOrder> {
+        try {
+            const numero = parseInt(numberOrder, 10);
+            const order = await this.model.findOne({ orderNumber: numero });
+            return order;
+        } catch (error) {
+            console.error('Error al buscar por número de orden:', error);
+            throw new Error('Error al buscar por número de orden');
+        }
+    }
+
     async update(id: string, orderDTO: OrderDTO): Promise<IOrder> {
         const newOrder = { id, ...orderDTO };
         return await this.model.findByIdAndUpdate(id, newOrder, { new: true });
@@ -39,5 +50,39 @@ export class OrderService {
     async delete(id: string) {
         await this.model.findByIdAndDelete(id);
         return {status: HttpStatus.OK, msg: 'Orden eliminada'};
+    }
+
+    async deleteAll() {
+        try {
+            const orders = await this.model.find();
+            for (const order of orders) {
+                await this.delete(order._id);
+            }
+    
+            return { status: HttpStatus.OK, msg: `${orders.length} órdenes eliminadas` };
+        } catch (error) {
+            console.error('Error al eliminar todas las órdenes:', error);
+            throw new Error('Error al eliminar todas las órdenes');
+        }
+    }
+
+    async findOrdersNotDelivered(): Promise<IOrder[]> {
+        try {
+            const orders = await this.model.find({ state: { $ne: 'Delivered' } });
+            return orders;
+        } catch (error) {
+            console.error('Error al buscar órdenes no entregadas:', error);
+            throw new Error('Error al buscar órdenes no entregadas');
+        }
+    }
+
+    async findOrdersDelivered(): Promise<IOrder[]> {
+        try {
+            const orders = await this.model.find({ state: 'Delivered' });
+            return orders;
+        } catch (error) {
+            console.error('Error al buscar órdenes entregadas:', error);
+            throw new Error('Error al buscar órdenes entregadas');
+        }
     }
 }

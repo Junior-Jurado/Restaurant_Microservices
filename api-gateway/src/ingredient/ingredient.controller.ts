@@ -25,6 +25,11 @@ export class IngredientController {
         return this._clientProxyIngredient.send(IngredientMSG.FIND_ALL, '');
     }
 
+    @Delete('shopping')
+    deleteAllShopping(): Observable<any> {
+        return this._clientProxyIngredient.send(IngredientMSG.DELETE_SHOPPING, '');
+    }
+
     @Get('shopping')
     findShoppingIngredients(): Observable<IShoppingHistory[]> {
         return this._clientProxyIngredient.send(IngredientMSG.GET_SHOPPING_INGREDIENTS, '');

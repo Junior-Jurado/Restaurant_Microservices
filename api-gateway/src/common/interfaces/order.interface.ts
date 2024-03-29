@@ -1,6 +1,8 @@
 import { IRecipe } from "./recipe.interface";
 
 export interface IOrder {
+    orderNumber: number;
     recipe: IRecipe;
-    isDone?: boolean;
+    state: string;
+    tableNumber: number;
 }
