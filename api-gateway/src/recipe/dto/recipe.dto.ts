@@ -4,11 +4,12 @@ import { IngredientDTO } from "src/ingredient/dto/ingredient.dto";
 
 
 export class RecipeDTO {
-
+    readonly _id?: string;
     @ApiProperty()
     @IsNotEmpty()
     @IsString()
     readonly name: string;
     readonly ingredients: IngredientDTO[];
-    readonly _id?: string;
+    readonly description: string;
+    readonly image?: string;
 }

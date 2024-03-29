@@ -5,5 +5,5 @@ export const OrderSchema = new mongoose.Schema({
         _id: { type: mongoose.Schema.Types.ObjectId, ref: 'recipes' },
         name: { type: String }  
     },
-    isDone: { type: Boolean, default: false } // Por defecto, una orden no está completada
+    isDone: { type: Boolean, default: false }
 }, { timestamps: true });

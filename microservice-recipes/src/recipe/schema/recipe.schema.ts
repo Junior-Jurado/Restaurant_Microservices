@@ -7,7 +7,9 @@ const IngredientSchema = new mongoose.Schema({
 
 export const RecipeSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    ingredients: [IngredientSchema] 
+    ingredients: [IngredientSchema] ,
+    image: { type: String },
+    description: { type: String, required: true },
 });
 
 RecipeSchema.index({ name: 1 }, { unique: true });

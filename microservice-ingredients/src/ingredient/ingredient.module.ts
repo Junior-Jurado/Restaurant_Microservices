@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { IngredientController } from './ingredient.controller';
 import { IngredientService } from './ingredient.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { INGREDIENT } from 'src/common/models/models';
-import { IngredientSchema } from './schema/ingredient.schema';
+import { INGREDIENT, SHOPPING_HISTORY } from 'src/common/models/models';
+import { IngredientSchema, ShoppingHistorySchema } from './schema/ingredient.schema';
 
 @Module({
   imports: [
@@ -12,7 +12,11 @@ import { IngredientSchema } from './schema/ingredient.schema';
         {
           name: INGREDIENT.name,
           useFactory: () => IngredientSchema
-        }
+        },
+        {
+          name: SHOPPING_HISTORY.name,
+          useFactory: () => ShoppingHistorySchema
+        },
       ]
     )
   ],
