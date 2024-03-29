@@ -19,4 +19,7 @@ export class IngredientesComponent implements OnInit {
       )
       .subscribe();
   }
+  addToCart(ingredient: Ingredient) {
+    console.log('Add to cart', ingredient);
+  }
 }

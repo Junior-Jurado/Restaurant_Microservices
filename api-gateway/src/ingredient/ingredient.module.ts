@@ -9,17 +9,15 @@ import { ProxyModule } from 'src/common/proxy/proxy.module';
 @Module({
   imports: [
     ProxyModule,
-    MongooseModule.forFeatureAsync(
-      [
-        {
-          name: INGREDIENT.name,
-          useFactory: () => IngredientSchema
-        }
-      ]
-    )
+    MongooseModule.forFeatureAsync([
+      {
+        name: INGREDIENT.name,
+        useFactory: () => IngredientSchema,
+      },
+    ]),
   ],
   controllers: [IngredientController],
   providers: [IngredientService],
-  exports: [IngredientService]
+  exports: [IngredientService],
 })
 export class IngredientModule {}

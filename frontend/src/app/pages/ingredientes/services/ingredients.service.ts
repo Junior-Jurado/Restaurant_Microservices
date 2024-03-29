@@ -7,7 +7,7 @@ import { Ingredient } from '../interfaces/ingredient.interface';
   providedIn: 'root',
 })
 export class IngredientsService {
-  private apiUrl = 'http://18.117.240.16/api/v1/ingredient';
+  private apiUrl = 'http://localhost:3000/api/v1/ingredient';
   constructor(private http: HttpClient) {}
 
   getIngredients(): Observable<Ingredient[]> {

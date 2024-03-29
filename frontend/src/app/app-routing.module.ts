@@ -9,6 +9,7 @@ const routes: Routes = [
         (m) => m.IngredientesModule
       ),
   },
+  { path: 'recipes', loadChildren: () => import('./pages/recipes/recipes.module').then(m => m.RecipesModule) },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

@@ -1,1 +1,29 @@
-<p>ingrediente works!</p>
+<ng-container>
+  <div class="col-md-4 mb-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">{{ ingredient.name }}</h5>
+      </div>
+
+      <div class="card-body">
+        <img
+          class="card-img-top"
+          [src]="
+            'assets/ingredientes/' + ingredient.name.toLowerCase() + '.jpg'
+          "
+          alt="Card image cap"
+        />
+
+        <p class="card-text">En bodega: {{ ingredient.quantity }}</p>
+        <button
+          type="button"
+          class="btn btn-primary btn-lg btn-block"
+          (click)="onClick()"
+        >
+          Solicitar
+          <i class="fas fa-cart-plus fa-2x me-lg-4 mb-3 mb-lg-0"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

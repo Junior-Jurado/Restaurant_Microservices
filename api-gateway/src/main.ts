@@ -7,8 +7,16 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true,
+    allowedHeaders: 'Content-Type,Authorization',
+  });
   app.useGlobalPipes(new ValidationPipe());
-  app.useGlobalFilters(new AllExceptionFilter);
+  app.useGlobalFilters(new AllExceptionFilter());
   app.useGlobalInterceptors(new TimeOutInterceptor());
 
   const options = new DocumentBuilder()
@@ -21,10 +29,10 @@ async function bootstrap() {
 
   SwaggerModule.setup('/api/docs', app, document, {
     swaggerOptions: {
-      filter: true
-    }
+      filter: true,
+    },
   });
-  
+
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
