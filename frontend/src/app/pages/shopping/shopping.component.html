@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="card-title m-b-0">Historial de compras de ingredientes</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Ingrediente</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Fecha creada</th>
+                <th scope="col">Última actualización</th>
+              </tr>
+            </thead>
+            <tbody class="customtable">
+              <tr *ngFor="let item of shopping">
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.createdAt | date : "dd/MM/yyyy HH:mm" }}</td>
+                <td>{{ item.updatedAt | date : "dd/MM/yyyy HH:mm" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

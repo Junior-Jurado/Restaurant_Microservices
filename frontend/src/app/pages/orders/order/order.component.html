@@ -11,15 +11,17 @@
             <h5 class="mb-0">
               ORDEN
               <span class="text-primary font-weight-bold" id="orderNumber"
-                >#order.orderNumber</span
+                ># {{ order.orderNumber }}</span
               >
             </h5>
           </div>
           <div class="text-end">
-            <p class="mb-0"><span>order.recipe.name</span></p>
             <p class="mb-0">
-              Estado
-              <span class="font-weight-bold">order.state</span>
+              <span>{{ order.recipe.name }}</span>
+            </p>
+            <p class="mb-0">
+              Mesa #
+              <span class="font-weight-bold">{{ order.tableNumber }}</span>
             </p>
           </div>
         </div>

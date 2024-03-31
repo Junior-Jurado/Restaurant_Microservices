@@ -1,0 +1,39 @@
+<div class="masthead bg-primary text-white text-center">
+  <div class="container d-flex align-items-center flex-column">
+    <img
+      class="masthead-avatar mb-5"
+      src="assets/img/avataaars.svg"
+      alt="..."
+    />
+    <h1 class="masthead-heading text-uppercase mb-0">
+      ¿ Preparado para una orden random ?
+    </h1>
+    <div class="divider-custom divider-light">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+      <div class="divider-custom-line"></div>
+    </div>
+  </div>
+  <section class="page-section bg-primary text-white mb-0" id="about">
+    <div class="container">
+      <div class="text-center">
+        <div class="center-content">
+          <form class="d-flex" role="createOrder">
+            <input
+              type="number"
+              name="miInput"
+              id="miInput"
+              class="form-control me-2"
+              pattern="[0-9]*"
+              placeholder="#Mesa"
+              title="Por favor, introduce solo números"
+            />
+            <button class="btn btn-xl btn-outline-light" (click)="crearOrden()">
+              Crear Plato Random
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

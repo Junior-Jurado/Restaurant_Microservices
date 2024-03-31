@@ -14,7 +14,11 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.orderSvc
       .getOrders()
-      .pipe(tap((recipes: Order[]) => (this.orders = recipes)))
+      .pipe(
+        tap((orders: Order[]) => {
+          this.orders = orders.sort((a, b) => b.orderNumber - a.orderNumber);
+        })
+      )
       .subscribe();
   }
   addToCart(order: Order) {
