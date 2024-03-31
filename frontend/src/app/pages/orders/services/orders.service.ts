@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, interval } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Order } from '../interfaces/order.interface';
 
 @Injectable({
@@ -8,9 +9,12 @@ import { Order } from '../interfaces/order.interface';
 })
 export class OrdersService {
   private apiUrl = 'http://18.117.240.16/api/v1/order';
+
   constructor(private http: HttpClient) {}
 
   getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.apiUrl);
+    return interval(1000).pipe(
+      switchMap(() => this.http.get<Order[]>(this.apiUrl))
+    );
   }
 }
