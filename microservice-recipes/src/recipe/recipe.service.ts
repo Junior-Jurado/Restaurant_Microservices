@@ -35,13 +35,14 @@ export class RecipeService {
         }
     }
 
-    async addIngredientQuantity(recipeId: string, ingredientId:string, quant: number): Promise <IRecipe> {
+    async addIngredientQuantity(recipeId: string, ingredientId:string, ingredientName:string, quant: number): Promise <IRecipe> {
         return await this.model.findByIdAndUpdate(
             recipeId, 
             {
                 $addToSet: {
                     ingredients: {
                         _id: ingredientId,
+                        name: ingredientName,
                         quantity: quant
                     }
                 }
@@ -60,14 +61,15 @@ export class RecipeService {
         return recipes[indice];
     }
 
-    // async cook(recipe: IRecipe): Promise<IRecipe> {
-    //     console.log('Cocinando:');
-    //     recipe.ingredients.forEach(ingredient => {
-    //         console.log(`ID: ${ingredient._id}, Quantity: ${ingredient.quantity}`);
-    //     });
-    //     return recipe;
-
-    // }
+    async removeIngredients(recipeId: string): Promise<IRecipe> {
+        const recipe = await this.model.findById(recipeId);
+        if (!recipe) {
+            throw new Error('Receta no encontrada');
+        }
+        recipe.ingredients = [];
+        await recipe.save();
+        return recipe; 
+    }
 
 
 }

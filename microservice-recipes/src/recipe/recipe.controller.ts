@@ -40,7 +40,7 @@ export class RecipeController {
 
     @MessagePattern(RecipeMSG.ADD_INGREDIENT)
     async addIngredientQuantity(@Payload() payload) {
-        return this.recipeService.addIngredientQuantity(payload.recipeId, payload.ingredientId, payload.quan);
+        return this.recipeService.addIngredientQuantity(payload.recipeId, payload.ingredientId, payload.ingredientName, payload.quan);
     }
 
     @MessagePattern(RecipeMSG.FIND_ONE_RANDOM)
@@ -48,10 +48,10 @@ export class RecipeController {
         return this.recipeService.findOneRandom();
     }
 
-    // @MessagePattern(RecipeMSG.COOK)
-    // cook(@Payload() payload) {
-    //     return this.recipeService.cook(payload);
-    // }
+    @MessagePattern(RecipeMSG.REMOVE_INGREDIENTS)
+    removeIngredients(@Payload() recipeId: string) {
+        return this.recipeService.removeIngredients(recipeId);
+    }
 
 
     

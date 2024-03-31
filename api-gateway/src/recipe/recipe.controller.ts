@@ -57,12 +57,17 @@ export class RecipeController {
         const ingredientId =  ingredient._id.toString();
         const quan =  parseInt(quantity);
         return this._clientProxyRecipe.send(RecipeMSG.ADD_INGREDIENT, 
-            {recipeId, ingredientId, quan})
+            {recipeId, ingredientName, ingredientId, quan})
     }
 
     @Put(':id')
     update(@Param('id') id: string, @Body() recipeDTO: RecipeDTO): Observable<IRecipe> {
         return this._clientProxyRecipe.send(RecipeMSG.UPDATE, { id, recipeDTO});
+    }
+
+    @Put('removeIngredients/:id')
+    removeIngredients(@Param('id') recipeId: string): Observable<IRecipe> {
+        return this._clientProxyRecipe.send(RecipeMSG.REMOVE_INGREDIENTS, recipeId);
     }
 
     @Delete(':id')
@@ -98,49 +103,48 @@ export class RecipeController {
 
         const flag = await this._clientProxyIngredient.send(IngredientMSG.GET_INGREDIENTS, recipe.ingredients).toPromise();
     
-        if(flag) {
-            try {
-                await new Promise(resolve => setTimeout(resolve, 30000));
-                const response3 = await fetch(`http://localhost:3000/api/v1/order/${orderId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ state: 'In preparation' }), 
-                });
-        
-                if (response3.ok) {
-                    console.log(`Order with ID ${orderId} successfully updated`);
-                } else {
-                    console.error(`Failed to update order with ID ${orderId}. Status: ${response3.status}`);
-                }
-        
-            } catch (error) {
-                console.error('Error updating order:', error);
-                throw new Error('Failed to update order');
+        try {
+            await new Promise(resolve => setTimeout(resolve, 30000));
+            const response3 = await fetch(`http://localhost:3000/api/v1/order/${orderId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ state: 'In preparation' }), 
+            });
+    
+            if (response3.ok) {
+                console.log(`Order with ID ${orderId} successfully updated`);
+            } else {
+                console.error(`Failed to update order with ID ${orderId}. Status: ${response3.status}`);
             }
-
-            try {
-                await new Promise(resolve => setTimeout(resolve, 30000));
-                const response2 = await fetch(`http://localhost:3000/api/v1/order/${orderId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ state: 'Delivered' }), 
-                });
-        
-                if (response2.ok) {
-                    console.log(`Order with ID ${orderId} successfully updated`);
-                } else {
-                    console.error(`Failed to update order with ID ${orderId}. Status: ${response2.status}`);
-                }
-        
-            } catch (error) {
-                console.error('Error updating order:', error);
-                throw new Error('Failed to update order');
-            }
+    
+        } catch (error) {
+            console.error('Error updating order:', error);
+            throw new Error('Failed to update order');
         }
+
+        try {
+            await new Promise(resolve => setTimeout(resolve, 30000));
+            const response2 = await fetch(`http://localhost:3000/api/v1/order/${orderId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ state: 'Delivered' }), 
+            });
+    
+            if (response2.ok) {
+                console.log(`Order with ID ${orderId} successfully updated`);
+            } else {
+                console.error(`Failed to update order with ID ${orderId}. Status: ${response2.status}`);
+            }
+    
+        } catch (error) {
+            console.error('Error updating order:', error);
+            throw new Error('Failed to update order');
+        }
+
         return flag;
     }
 
