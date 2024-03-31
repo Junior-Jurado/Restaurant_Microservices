@@ -1,7 +1,12 @@
 <ng-container>
   <div class="col-md-4 mb-4">
     <div class="card">
-      <div class="card-header">
+      <div
+        class="card-header"
+        [ngStyle]="{
+          'background-color': ingredient.quantity === 0 ? 'red' : 'greenyellow'
+        }"
+      >
         <h5 class="card-title">{{ ingredient.name }}</h5>
       </div>
 
@@ -13,19 +18,6 @@
         />
         <p class="card-text">{{ ingredient.description }}</p>
         <p class="card-text">En bodega: {{ ingredient.quantity }}</p>
-        <button
-          type="button"
-          class="btn btn-lg btn-block"
-          [ngClass]="{
-            'btn-danger': ingredient.quantity === 0,
-            'btn-success': ingredient.quantity > 0
-          }"
-          [disabled]="ingredient.quantity > 0"
-          (click)="onClick()"
-        >
-          Solicitar
-          <i class="fas fa-cart-plus fa-2x me-lg-4 mb-3 mb-lg-0"></i>
-        </button>
       </div>
     </div>
   </div>

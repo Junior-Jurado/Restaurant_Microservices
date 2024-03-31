@@ -1,3 +1,17 @@
+<script
+  src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+  crossorigin="anonymous"
+></script>
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+  rel="stylesheet"
+  type="text/css"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
+  rel="stylesheet"
+  type="text/css"
+/>
 <ng-container>
   <div class="col-md-4 mb-4">
     <div class="card">
@@ -6,21 +20,87 @@
       </div>
 
       <div class="card-body">
-        <img
-          class="card-img-top"
-          [src]="recipe.image.toLowerCase()"
-          alt="Card image cap"
-        />
-
-        <p class="card-text">Descripción: {{ recipe.description }}</p>
-        <button
-          type="button"
-          class="btn btn-primary btn-lg btn-block"
-          (click)="onClick()"
+        <div
+          class="portfolio-item mx-auto"
+          data-bs-toggle="modal"
+          data-bs-target="#portfolioModal1"
         >
-          Ver Receta
-          <i class="fas fa-utensils fa-2x me-lg-4 mb-3 mb-lg-0"></i>
-        </button>
+          <div
+            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100"
+          >
+            <div class="portfolio-item-caption-content text-center text-white">
+              <i class="fas fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <div class="center">
+            <img
+              class="img-fluid"
+              [src]="recipe.image.toLowerCase()"
+              alt="..."
+            />
+          </div>
+        </div>
+
+        <div
+          class="portfolio-modal modal fade"
+          id="portfolioModal1"
+          tabindex="-1"
+          aria-labelledby="portfolioModal1"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header border-0">
+                <button
+                  class="btn-close"
+                  type="button"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body text-center pb-5">
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                      <!-- Portfolio Modal - Title-->
+                      <h2
+                        class="portfolio-modal-title text-secondary text-uppercase mb-0"
+                      >
+                        {{ recipe.name }}
+                      </h2>
+                      <!-- Icon Divider-->
+                      <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon">
+                          <i class="fas fa-star"></i>
+                        </div>
+                        <div class="divider-custom-line"></div>
+                      </div>
+
+                      <img
+                        class="img-fluid rounded mb-5"
+                        [src]="recipe.image.toLowerCase()"
+                        alt="..."
+                      />
+                      <!-- Portfolio Modal - Text-->
+                      <p class="mb-4">Descripción: {{ recipe.description }}</p>
+                      <h3>Ingredientes</h3>
+                      <ng-container
+                        *ngFor="let ingredient of recipe.ingredients"
+                      >
+                        <p>{{ ingredient.name }}: {{ ingredient.quantity }}</p>
+                      </ng-container>
+                      <button class="btn btn-primary" data-bs-dismiss="modal">
+                        <i class="fas fa-xmark fa-fw"></i>
+                        Cerrar Ventana
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
