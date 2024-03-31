@@ -16,13 +16,27 @@ export class OrderController {
 
     @MessagePattern(OrderMSG.FIND_ALL)
     findAll() {
-        return this.orderService.findAll()
+        return this.orderService.findAll();
     }
-
 
     @MessagePattern(OrderMSG.FIND_ONE)
     findOne(@Payload() id: string) {
         return this.orderService.findOne(id);
+    }
+
+    @MessagePattern(OrderMSG.FIND_NUMBER_ORDER)
+    findNumberOrder(@Payload() numberOrder) {
+        return this.orderService.findNumberOrder(numberOrder);
+    }
+
+    @MessagePattern(OrderMSG.NOT_DELIVERED)
+    findNotDelivered() {
+        return this.orderService.findOrdersNotDelivered();
+    }
+
+    @MessagePattern(OrderMSG.DELIVERED)
+    findDelivered() {
+        return this.orderService.findOrdersDelivered();
     }
 
     @MessagePattern(OrderMSG.UPDATE)
@@ -33,6 +47,11 @@ export class OrderController {
     @MessagePattern(OrderMSG.DELETE)
     delete(@Payload() id: string) {
         return this.orderService.delete(id)
+    }
+
+    @MessagePattern(OrderMSG.DELETE_ALL)
+    deleteAll() {
+        return this.orderService.deleteAll();
     }
 
 

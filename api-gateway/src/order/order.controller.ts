@@ -16,9 +16,6 @@ export class OrderController {
     private _clientProxyOrder = this.clientProxy.clientProxyOrders();
     private _clientProxyRecipe = this.clientProxy.clientProxyRecipes();
 
-
-    
-
     @Post()
     async create(@Body() orderDTO: OrderDTO): Promise<Observable<IOrder>> {
         try {
@@ -64,16 +61,30 @@ export class OrderController {
         }
     }
 
-
-
     @Get()
     findAll(): Observable<IOrder[]> {
         return this._clientProxyOrder.send(OrderMSG.FIND_ALL, '');
     }
 
+    @Get('notDelivered')
+    findNotDelivered(): Observable<IOrder[]> {
+        return this._clientProxyOrder.send(OrderMSG.NOT_DELIVERED, '');
+    }
+
+    @Get('delivered')
+    findDelivered(): Observable<IOrder[]> {
+        return this._clientProxyOrder.send(OrderMSG.DELIVERED, '');
+    }
+
+
     @Get(':id')
     findOne(@Param('id') id: string): Observable<IOrder> {
         return this._clientProxyOrder.send(OrderMSG.FIND_ONE, id);
+    }
+
+    @Get('find/:numberOrder')
+    findNumberOrder(@Param('numberOrder') numberOrder: number): Observable<IOrder> {
+        return this._clientProxyOrder.send(OrderMSG.FIND_NUMBER_ORDER, numberOrder);
     }
 
     @Put(':id')
@@ -88,6 +99,11 @@ export class OrderController {
     @Delete(':id')
     delete(@Param('id') id: string): Observable<any> {
         return this._clientProxyOrder.send(OrderMSG.DELETE, id);
+    }
+
+    @Delete()
+    deleteAll(): Observable<any> {
+        return this._clientProxyOrder.send(OrderMSG.DELETE_ALL, '');
     }
 
 }

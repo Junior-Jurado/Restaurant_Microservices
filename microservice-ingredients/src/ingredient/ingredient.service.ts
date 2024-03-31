@@ -18,6 +18,16 @@ export class IngredientService {
         return await newIngredient.save();
     }
 
+    async deleteAllShopping() {
+        try {
+            const result = await this.modelS.deleteMany({});
+            return { status: HttpStatus.OK, msg: `${result.deletedCount} documentos eliminados` };
+        } catch (error) {
+            console.error('Error al eliminar todos los documentos:', error);
+            throw new Error('Error al eliminar todos los documentos');
+        }
+    }
+
     async findAll(): Promise<IIngredient[]> {
         return await this.model.find()
     }

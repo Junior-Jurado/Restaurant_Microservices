@@ -12,32 +12,4 @@ export class OrderService {
 
     constructor(@InjectModel(ORDER.name) private readonly model:Model<IOrder>) {}
 
-    async create(orderDTO: OrderDTO, recipeDTO: RecipeDTO): Promise<IOrder> {
-        const newOrder = new this.model({
-            ...orderDTO,
-            recipe : {
-                _id: recipeDTO._id,
-                name: recipeDTO.name
-            },
-        });
-        return await newOrder.save();
-    }
-
-    async findAll(): Promise<IOrder[]> {
-        return await this.model.find();
-    }
-
-    async findOne(id: string): Promise<IOrder> {
-        return await this.model.findById(id);
-    }
-
-    async update(id: string, orderDTO: OrderDTO): Promise<IOrder> {
-        const newOrder = { id, ...orderDTO };
-        return await this.model.findByIdAndUpdate(id, newOrder, { new: true });
-    }
-
-    async delete(id: string) {
-        await this.model.findByIdAndDelete(id);
-        return {status: HttpStatus.OK, msg: 'Orden eliminada'};
-    }
 }

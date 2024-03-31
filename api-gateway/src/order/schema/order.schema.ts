@@ -1,9 +1,11 @@
 import * as mongoose from 'mongoose';
 
 export const OrderSchema = new mongoose.Schema({
+    orderNumber: { type: Number, required: true, unique: true },
     recipe: {
         _id: { type: mongoose.Schema.Types.ObjectId, ref: 'recipes' },
         name: { type: String }  
     },
-    isDone: { type: Boolean, default: false }
+    state: { type: String, default: 'Created' },
+    tableNumber: { type: Number, required: true }
 }, { timestamps: true });
