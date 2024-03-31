@@ -12,16 +12,31 @@ export class OrderService {
 
     constructor(@InjectModel(ORDER.name) private readonly model:Model<IOrder>) {}
 
+    // async create(orderDTO: OrderDTO, recipeDTO: RecipeDTO): Promise<IOrder> {
+    //     const newOrder = new this.model({
+    //         ...orderDTO,
+    //         recipe : {
+    //             _id: recipeDTO._id,
+    //             name: recipeDTO.name
+    //         },
+    //     });
+    //     return await newOrder.save();
+    // }
+
     async create(orderDTO: OrderDTO, recipeDTO: RecipeDTO): Promise<IOrder> {
-        const newOrder = new this.model({
-            ...orderDTO,
-            recipe : {
-                _id: recipeDTO._id,
-                name: recipeDTO.name
-            },
-        });
-        return await newOrder.save();
-    }
+        const order = new this.model(orderDTO);
+    
+        const maxOrder = await this.model.findOne({}, { orderNumber: 1 }).sort({ orderNumber: -1 }).exec();
+        order.orderNumber = maxOrder ? maxOrder.orderNumber + 1 : 1;
+    
+        order.recipe = {
+          _id: recipeDTO._id,
+          name: recipeDTO.name
+        };
+    
+        return await order.save();
+      }
+    
 
     async findAll(): Promise<IOrder[]> {
         return await this.model.find();
