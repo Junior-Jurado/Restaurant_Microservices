@@ -4,8 +4,6 @@ import { RecipeDTO } from "src/recipe/dto/recipe.dto";
 
 
 export class OrderDTO {
-    @ApiProperty()
-    readonly orderNumber: number;
 
     @IsEmpty()
     readonly recipe: RecipeDTO;

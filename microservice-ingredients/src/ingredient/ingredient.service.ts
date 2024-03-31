@@ -28,6 +28,11 @@ export class IngredientService {
         }
     }
 
+    async update5() {
+        await this.model.updateMany({}, { $set: { quantity: 5 } });
+        return { success: true, message: 'Todos los documentos actualizados a quantity 5' };
+    }
+
     async findAll(): Promise<IIngredient[]> {
         return await this.model.find()
     }

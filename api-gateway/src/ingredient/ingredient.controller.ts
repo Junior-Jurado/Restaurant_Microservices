@@ -25,6 +25,11 @@ export class IngredientController {
         return this._clientProxyIngredient.send(IngredientMSG.FIND_ALL, '');
     }
 
+    @Put('update5')
+    update5(): Observable<IIngredient[]> {
+        return this._clientProxyIngredient.send(IngredientMSG.UPDATE5, '');
+    }
+
     @Delete('shopping')
     deleteAllShopping(): Observable<any> {
         return this._clientProxyIngredient.send(IngredientMSG.DELETE_SHOPPING, '');
