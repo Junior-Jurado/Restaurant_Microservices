@@ -13,8 +13,6 @@ export class OrdersService {
   constructor(private http: HttpClient) {}
 
   getOrders(): Observable<Order[]> {
-    return interval(1000).pipe(
-      switchMap(() => this.http.get<Order[]>(this.apiUrl))
-    );
+    return this.http.get<Order[]>(this.apiUrl);
   }
 }

@@ -13,8 +13,6 @@ export class IngredientsService {
   constructor(private http: HttpClient) {}
 
   getIngredients(): Observable<Ingredient[]> {
-    return interval(1000).pipe(
-      switchMap(() => this.http.get<Ingredient[]>(this.apiUrl))
-    );
+    return this.http.get<Ingredient[]>(this.apiUrl);
   }
 }

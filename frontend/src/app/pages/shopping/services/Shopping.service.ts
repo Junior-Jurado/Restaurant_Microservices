@@ -13,8 +13,6 @@ export class ShoppingService {
   constructor(private http: HttpClient) {}
 
   getShopping(): Observable<Shopping[]> {
-    return interval(1000).pipe(
-      switchMap(() => this.http.get<Shopping[]>(this.apiUrl))
-    );
+    return this.http.get<Shopping[]>(this.apiUrl);
   }
 }
