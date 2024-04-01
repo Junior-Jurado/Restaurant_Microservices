@@ -1,0 +1,624 @@
+{
+	"info": {
+		"_postman_id": "76dc5a2c-0236-4d26-9eb1-6e4b9ea2a560",
+		"name": "Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "31711784",
+		"_collection_link": "https://microservices-architectu.postman.co/workspace/Microservices_5_architectur-Wor~76c93dd1-9e92-438f-8c38-e062160a8e67/collection/31711784-76dc5a2c-0236-4d26-9eb1-6e4b9ea2a560?action=share&source=collection_link&creator=31711784"
+	},
+	"item": [
+		{
+			"name": "Recipes",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Almuerzo de 14k\",\r\n    \"description\": \"Que valgan esas 2k demás\",\r\n    \"image\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/v1/recipe",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipe"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/api/v1/recipe",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipe"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/api/v1/recipe/6600f7ce4e6a31283a54bfbe",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipe",
+								"6600f7ce4e6a31283a54bfbe"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ingredients\": {\r\n        \"_id\": \"6609cff004f24eafde5a06a2\",\r\n        \"name\": \"Tomato\",\r\n        \"quantity\": 3\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/v1/recipe/6605915002175b74ee59d51f",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipe",
+								"6605915002175b74ee59d51f"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove ingredients",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ingredients\": {\r\n        \"_id\": \"6609cff004f24eafde5a06a2\",\r\n        \"name\": \"Tomato\",\r\n        \"quantity\": 3\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/v1/recipe/removeIngredients/66058edcbdbbe675fc3e0bc0",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipe",
+								"removeIngredients",
+								"66058edcbdbbe675fc3e0bc0"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Ingredient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Solo Papas fritas \",\r\n    \"ingredients\": [\r\n        {\r\n            \"id\": \"3\",\r\n            \"quantity\": 4\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/v1/recipe/6609d06a04f24eafde5a06a8/ingredient/Lemon/quantity/2",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipe",
+								"6609d06a04f24eafde5a06a8",
+								"ingredient",
+								"Lemon",
+								"quantity",
+								"2"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/api/v1/recipe/6600f7ce4e6a31283a54bfbe",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipe",
+								"6600f7ce4e6a31283a54bfbe"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ingredients",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Lemon\",\r\n    \"quantity\": 5,\r\n    \"image\": \"image.lemon\",\r\n    \"description\": \"A description ingredient\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/v1/ingredient",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ingredient"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/api/v1/ingredient",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ingredient"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/api/v1/ingredient/66010b0067a93138ecaf5403",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ingredient",
+								"66010b0067a93138ecaf5403"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Meat\",\r\n    \"quantity\": 5,\r\n    \"description\": \"It's a Meat\",\r\n    \"image\": \"https://img.freepik.com/foto-gratis/contenido-grasa-cerdo-carne-carnosa_1203-5843.jpg?t=st=1711687774~exp=1711691374~hmac=eb0a048d2675b26e3ac0249e33fa569434aea3cb1c4ca267fc2ad40cf477c469&w=740\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/v1/ingredient/66039d38870fea15fd2f97c0",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ingredient",
+								"66039d38870fea15fd2f97c0"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update5",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/api/v1/ingredient/update5",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ingredient",
+								"update5"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/api/v1/ingredient/6600f7ce4e6a31283a54bfbe",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ingredient",
+								"6600f7ce4e6a31283a54bfbe"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete shopping",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/api/v1/ingredient/shopping",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ingredient",
+								"shopping"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Shopping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/ingredient/shopping",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"ingredient",
+								"shopping"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderNumber\": 3,\r\n    \"tableNumber\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{endpoint}}/api/v1/order"
+					},
+					"response": []
+				},
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{endpoint}}/api/v1/order"
+					},
+					"response": []
+				},
+				{
+					"name": "Find One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{endpoint}}/api/v1/order/66006bc141f9047ac84c76e2"
+					},
+					"response": []
+				},
+				{
+					"name": "Find Number Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{endpoint}}/api/v1/order/66006bc141f9047ac84c76e2"
+					},
+					"response": []
+				},
+				{
+					"name": "Not Delivery",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{endpoint}}/api/v1/order/notDelivered"
+					},
+					"response": []
+				},
+				{
+					"name": "Delivery",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{endpoint}}/api/v1/order/66006bc141f9047ac84c76e2"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"recipe\": \"Papas fritas\",\r\n    \"isDone\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{endpoint}}/api/v1/order/66006bc141f9047ac84c76e2"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Cambio de descripción\",\r\n    \"isDone\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{endpoint}}/api/v1/order/660079cb2548226e1372c513"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{endpoint}}/api/v1/order/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "https://microservices-utadeo-arq-fea471e6a9d4.herokuapp.com/api/v1/software-architecture/market-place?ingredient=potato",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://microservices-utadeo-arq-fea471e6a9d4.herokuapp.com/api/v1/software-architecture/market-place?ingredient=potato",
+					"protocol": "https",
+					"host": [
+						"microservices-utadeo-arq-fea471e6a9d4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"software-architecture",
+						"market-place"
+					],
+					"query": [
+						{
+							"key": "ingredient",
+							"value": "potato"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
