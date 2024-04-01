@@ -7,8 +7,7 @@ import { Recipe } from '../interfaces/recipe.interface';
   styleUrl: './recipe.component.scss',
 })
 export class RecipeComponent implements OnInit {
-  portfolioModalId: string = 'portfolioModal1';
-  static nextId = 1;
+  portfolioModalId: string = '';
   @Input() recipe!: Recipe;
   @Input() index!: number;
   @Output() addToCartClick = new EventEmitter<Recipe>();

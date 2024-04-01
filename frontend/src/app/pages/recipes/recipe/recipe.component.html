@@ -23,7 +23,7 @@
         <div
           class="portfolio-item mx-auto"
           data-bs-toggle="modal"
-          data-bs-target="#portfolioModal1"
+          [attr.data-bs-target]="'#' + portfolioModalId"
         >
           <div
             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100"
@@ -55,6 +55,7 @@
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
+                <p></p>
               </div>
               <div class="modal-body text-center pb-5">
                 <div class="container">
@@ -81,6 +82,7 @@
                         alt="..."
                       />
                       <!-- Portfolio Modal - Text-->
+
                       <p class="mb-4">Descripción: {{ recipe.description }}</p>
                       <h3>Ingredientes</h3>
                       <ng-container
