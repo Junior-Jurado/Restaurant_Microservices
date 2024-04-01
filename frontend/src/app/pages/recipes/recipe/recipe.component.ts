@@ -7,12 +7,14 @@ import { Recipe } from '../interfaces/recipe.interface';
   styleUrl: './recipe.component.scss',
 })
 export class RecipeComponent implements OnInit {
+  portfolioModalId: string = 'portfolioModal1';
+  static nextId = 1;
   @Input() recipe!: Recipe;
+  @Input() index!: number;
   @Output() addToCartClick = new EventEmitter<Recipe>();
   constructor() {}
-  ngOnInit(): void {}
-
-  onClick(): void {
-    this.addToCartClick.emit(this.recipe);
+  ngOnInit(): void {
+    // Generar un ID único para el modal basado en el nombre de la receta
+    this.portfolioModalId = 'portfolioModal' + this.index;
   }
 }

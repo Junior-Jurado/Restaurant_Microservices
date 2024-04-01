@@ -1,9 +1,9 @@
 <ng-container>
   <div class="recipes">
     <app-recipe
-      (addToCartClick)="addToCart($event)"
       [recipe]="recipe"
-      *ngFor="let recipe of recipes"
+      [index]="i"
+      *ngFor="let recipe of recipes; let i = index"
     ></app-recipe>
   </div>
   <div id="app-root"></div>
